@@ -8,7 +8,11 @@ class Player
         sf::Texture texture;
 
         float movementSpeed;
-        //funciones
+
+        float attackCooldown;
+        float attackCooldownMax;
+        //funciones privadas
+        void initVariables();
         void initTexture();
         void initSprite();
 
@@ -21,8 +25,9 @@ class Player
 
         //funciones
         void move(const float dirX, const float dirY);
+        const bool canAttack();
 
-
+        void updateAttack();
         void update();
         void render(sf::RenderTarget &target);
 }

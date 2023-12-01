@@ -1,4 +1,5 @@
 #pragma once
+
 #include"Player h"
 
 class Game
@@ -6,8 +7,12 @@ class Game
 private:
     sf::RenderWindow* window;
 
+    //Player
+    Player* player;
+    
 //Private fuctions
     void initWindow();
+    void initPlayer();
 
 public:
     Game();

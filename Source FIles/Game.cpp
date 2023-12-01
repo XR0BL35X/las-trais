@@ -8,6 +8,12 @@ void Game::initWindow()
     this->window.setVerticalSyncEnabled(false);
 }
 
+void Game::initTextures()
+{
+    this->textures["BULLET"] = new sf::Texture();
+    this->textures["BULLET"]->loadFromFile("Textures/bullet.png");//Aqui se pone la imagen del el poryectil.
+}
+
 void Game::initPlayer()
 {
     this->player = new Player();
@@ -17,6 +23,7 @@ void Game::initPlayer()
 Game::Game()
 {
     this->initWindow();
+    this->initTextures();
     this->initPlayer();
 }
 
@@ -24,6 +31,18 @@ Game::~Game()
 {
     delete this->window;
     delete this->player;
+
+    //Delete textures
+    for (auto &i : this->textures)
+    {
+       delete i.second;
+    }
+    
+    //Delete bullets
+    for (auto *i : this->bullets)
+    {
+        delete i;
+    }
 }
 
 //Fuctions
@@ -36,9 +55,8 @@ void Game::run()
     }
 }
 
-     void Game::updatePollEvents();
-     {
-        
+void Game::updatePollEvents();
+{   
     sf::Event e;
     while(this->window->pollEvent(e))
     {
@@ -47,34 +65,42 @@ void Game::run()
         if(e.Event::KeyPressed && e.Event::key.code == sf::Keyboar::Escape)
         this->window->close();
     }
-     }
+}
 
-     void Game::updateinput();
-     {
-        
+void Game::updateinput();
+{    
     //Move player
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
        this->player->move(-1.f, 0.f);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
        this->player->move(1.f, 0.f); 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
        this->player->move(0.f, -1.f); 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
        this->player->move(0.f, 1.f); 
-     }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+        this->bullets.push_back(new Bullet(this->textures["BULLET"],this->player->getPos().x, this->player->getPos().y, 0.f,0.f,0.f,0.f,0.f));
+    }   
+}
+
+void Game::updateBullets()
+    {
+        for (auto *Bullet : this->bullets)
+        {
+            bullet->update();
+        }
+    }
 
 void Game::update()
     {
         this->updatePollEvents();
 
-        this->updateinput();
-   
+        this->updateInput();
+
+        this->updateBullets();
     }
-
-       
-        
-
-}
 
 void Game::render()
 {
@@ -82,6 +108,11 @@ void Game::render()
 
     //Draw all the stuffs
     this->player->render(*this->window);
+
+    for (auto *Bullet : this->bullets)
+    {
+      bullet->render(this->window);
+    }
 
     this->window->display();
 }

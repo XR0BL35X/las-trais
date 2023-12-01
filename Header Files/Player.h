@@ -4,7 +4,7 @@
 class Player
 {
     private:
-         sf::Sprite sprite;
+        sf::Sprite sprite;
         sf::Texture texture;
 
         float movementSpeed;
@@ -15,6 +15,9 @@ class Player
     public:
         Player();
         virtual ~Player();
+        
+        //Accessor
+        const sf::Vector2f& getPos() const;
 
         //funciones
         void move(const float dirX, const float dirY);

@@ -36,17 +36,22 @@ void Game::run()
     }
 }
 
-void Game::update()
-{
+     void Game::updatePollEvents();
+     {
+        
     sf::Event e;
     while(this->window->pollEvent(e))
     {
         if(e.Event::type == sf::Event::closed)
         this->window->close();
-    if(e.Event::KeyPressed && e.Event::key.code == sf::Keyboar::Escape)
+        if(e.Event::KeyPressed && e.Event::key.code == sf::Keyboar::Escape)
         this->window->close();
     }
+     }
 
+     void Game::updateinput();
+     {
+        
     //Move player
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
        this->player->move(-1.f, 0.f);
@@ -55,7 +60,18 @@ void Game::update()
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
        this->player->move(0.f, -1.f); 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-       this->player->move(0.f, 1.f);    
+       this->player->move(0.f, 1.f); 
+     }
+
+void Game::update()
+    {
+        this->updatePollEvents();
+
+        this->updateinput();
+   
+    }
+
+       
         
 
 }

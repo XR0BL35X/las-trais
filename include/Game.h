@@ -1,27 +1,27 @@
 #pragma once
 
 #include <map>
-#include <Player.h>
-#include <Bullet.h>
+#include<Player.h>
+#include<Bullet.h>
 
 class Game
 {
 private:
-    //Window
+//window
     sf::RenderWindow* window;
 
-    //Resouces
-    std::map<std::string, sf::Texture> textures;
-    std::vector<Bullet*> bullet;
+//Resouces
+    std::map<std::string, sf::Texture*> textures;
+    std::vector<Bullet*> bullets;
 
-    //Player
+//Player
     Player* player;
-    
-    //Private fuctions
-    void initWindow();
-    void initTextures();
 
+//Private fuctions
+    void initWindow();
     void initPlayer();
+
+    void initTextures();
 
 public:
     Game();
@@ -29,9 +29,9 @@ public:
 
     //Functions
     void run();
-    
+
     void updatePollEvents();
-    void updateinput();
+    void updateInput();
     void updateBullets();
     void update();
     void render();

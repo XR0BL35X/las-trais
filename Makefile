@@ -1,7 +1,8 @@
 # Directorios de origen y destino
 SRC_DIR := src
 BIN_DIR := bin
-SFML := -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+
+SFML := -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lchipmunk
 PROYECT := $(BIN_DIR)/LasTrais
 
 
@@ -15,3 +16,4 @@ $(PROYECT) : $(CPP_FILES)
 # Regla para ejecutar cada archivo .exe
 run: $(PROYECT)
 	./$<
+

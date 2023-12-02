@@ -1,12 +1,11 @@
 #include <Game.h>
 
-
 //Private functions 
 void Game::initWindow()
 {
     this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Swaglords of Space - Ganme 3" , sf::Style::Close |  sf::Style::Titlebar );
-    this->window.setFrameratelimit(144);
-    this->window.setVerticalSyncEnabled(false);
+    this->window->setFramerateLimit(144);
+    this->window->setVerticalSyncEnabled(false);
 }
 
 void Game::initTextures()
@@ -26,6 +25,7 @@ Game::Game()
     this->initWindow();
     this->initTextures();
     this->initPlayer();
+
 }
 
 Game::~Game()
@@ -38,14 +38,13 @@ Game::~Game()
     {
        delete i.second;
     }
-    
+
     //Delete bullets
     for (auto *i : this->bullets)
     {
         delete i;
     }
 }
-
 //Fuctions
 void Game::run()
 {
@@ -56,21 +55,21 @@ void Game::run()
     }
 }
 
-void Game::updatePollEvents();
-{   
-    sf::Event e;
+void Game::updatePollEvents()
+{
+  sf::Event e;
     while(this->window->pollEvent(e))
     {
-        if(e.Event::type == sf::Event::closed)
+        if(e.Event::type == sf::Event::Closed)
         this->window->close();
-        if(e.Event::KeyPressed && e.Event::key.code == sf::Keyboar::Escape)
+    if(e.Event::KeyPressed && e.Event::key.code == sf::Keyboard::Escape)
         this->window->close();
     }
 }
 
-void Game::updateinput();
-{    
-    //Move player
+void Game::updateInput()
+{
+        //Move player
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
        this->player->move(-1.f, 0.f);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -80,51 +79,43 @@ void Game::updateinput();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
        this->player->move(0.f, 1.f); 
 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->player->canAtack())
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) 
     {
-        this->bullets.push_back(new Bullet(this->textures["BULLET"],this->player->getPos().x, this->player->getPos().y, 0.f, -1.f, 5.f));
-    }   
+
+    this->bullets.push_back(new Bullet(this->textures["BULLET"], this->player->getPos().x, this->player->getPos().y,0.f,0.f,0.f,0.f));
+      
+    }  
 }
+
+
+
 
 void Game::updateBullets()
     {
-        unsigned counter = 0;
-        for (auto *Bullet : this->bullets)
+        for (auto *bullet : this->bullets)
         {
             bullet->update();
-            //bullet culling (top of screen)
-            if(bullet->getBounds().top + bullet->getBounds().height < 0.f)
-            {  
-                 //delete bullet
-                delete bullet;
-                this->bullets.erase(this->bullets.begin() + counter);
-                --counter;  
-
-                std::cout << this->bullets.size() <<"\n";      
-            }
-            ++counter
         }
+
     }
 
 void Game::update()
     {
-        this->updatePollEvents();
+    this->updatePollEvents();
 
-        this->updateInput();
+    this->updateInput();
 
-        this->player->update();
-
-        this->updateBullets();
+    this->updateBullets();
     }
-
 void Game::render()
+    
 {
     this->window->clear();
 
-    //Draw all the stuffs
+//Draw all the stuffs
     this->player->render(*this->window);
 
-    for (auto *Bullet : this->bullets)
+    for (auto *bullet : this->bullets)
     {
       bullet->render(this->window);
     }

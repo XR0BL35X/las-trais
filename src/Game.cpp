@@ -1,4 +1,5 @@
-#include "Game.h"
+#include <Game.h>
+
 
 //Private functions 
 void Game::initWindow()

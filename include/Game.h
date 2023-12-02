@@ -1,8 +1,8 @@
 #pragma once
 
 #include <map>
-#include"Player h"
-#include"Bullet.h"
+#include <Player.h>
+#include <Bullet.h>
 
 class Game
 {

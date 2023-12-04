@@ -1,9 +1,11 @@
 #pragma once
 
-#include <map>
-#include<Player.h>
-#include<Bullet.h>
-#include<Enemy.h>
+#include<map>
+#include<string>
+#include<sstream>
+#include"Player.h"
+#include"Bullet.h"
+#include"Enemy.h"
 
 class Game
 {
@@ -15,9 +17,26 @@ private:
     std::map<std::string, sf::Texture*> textures;
     std::vector<Bullet*> bullets;
 
+    //GUI
+	sf::Font font;
+	sf::Text pointText;
+
+	sf::Text gameOverText;
+
+	//World
+	sf::Texture worldBackgroundTex;
+	sf::Sprite worldBackground;
+
+	//Systems
+	unsigned points;
+
     //Player
     Player* player;
 
+    //PlayerGUI
+	sf::RectangleShape playerHpBar;
+	sf::RectangleShape playerHpBarBack;
+   
     //Enemies
 	float spawnTimer;
 	float spawnTimerMax;
@@ -25,22 +44,32 @@ private:
 
     //Private fuctions
     void initWindow();
-    void initPlayer();
+	void initTextures();
+	void initGUI();
+	void initWorld();
+	void initSystems();
 
-    void initTextures();
-    void initEnemies();
+	void initPlayer();
+	void initEnemies();
 
 public:
     Game();
-    virtual ~Game();
+	virtual ~Game();
 
-    //Functions
-    void run();
+	//Functions
+	void run();
 
-    void updatePollEvents();
-    void updateInput();
-    void updateBullets();
-    void updateEnemies();
-    void update();
-    void render();
+	void updatePollEvents();
+	void updateInput();
+	void updateGUI();
+	void updateWorld();
+	void updateCollision();
+	void updateBullets();
+	void updateEnemies();
+	void updateCombat();
+	void update();
+
+	void renderGUI();
+	void renderWorld();
+	void render();
 };

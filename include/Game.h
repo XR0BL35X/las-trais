@@ -3,25 +3,32 @@
 #include <map>
 #include<Player.h>
 #include<Bullet.h>
+#include<Enemy.h>
 
 class Game
 {
 private:
-//window
+    //window
     sf::RenderWindow* window;
 
-//Resouces
+    //Resouces
     std::map<std::string, sf::Texture*> textures;
     std::vector<Bullet*> bullets;
 
-//Player
+    //Player
     Player* player;
 
-//Private fuctions
+    //Enemies
+	float spawnTimer;
+	float spawnTimerMax;
+	std::vector<Enemy*> enemies;
+
+    //Private fuctions
     void initWindow();
     void initPlayer();
 
     void initTextures();
+    void initEnemies();
 
 public:
     Game();
@@ -33,6 +40,7 @@ public:
     void updatePollEvents();
     void updateInput();
     void updateBullets();
+    void updateEnemies();
     void update();
     void render();
 };

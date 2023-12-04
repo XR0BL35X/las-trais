@@ -19,13 +19,19 @@ void Game::initPlayer()
     this->player = new Player();
 }
 
+void Game::initEnemies()
+{
+	this->spawnTimerMax = 50.f;
+	this->spawnTimer = this->spawnTimerMax;
+}
+
 //Con/Des
 Game::Game()
 {
     this->initWindow();
     this->initTextures();
     this->initPlayer();
-
+    this->initEnemies();
 }
 
 Game::~Game()
@@ -44,7 +50,14 @@ Game::~Game()
     {
         delete i;
     }
+
+	//Delete enemies
+	for (auto *i : this->enemies)
+	{
+		delete i;
+	}
 }
+
 //Fuctions
 void Game::run()
 {
@@ -69,7 +82,7 @@ void Game::updatePollEvents()
 
 void Game::updateInput()
 {
-        //Move player
+    //Move player
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
        this->player->move(-1.f, 0.f);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -81,14 +94,18 @@ void Game::updateInput()
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)&& this->player->canAttack()) 
     {
-
-    this->bullets.push_back(new Bullet(this->textures["BULLET"], this->player->getPos().x, this->player->getPos().y, 0.f, -1.f, 5.f));
-      
+        this->bullets.push_back(
+			new Bullet(
+			this->textures["BULLET"], 
+			this->player->getPos().x + this->player->getBounds().width/2.f, 
+			this->player->getPos().y, 
+			0.f, 
+			-1.f, 
+			5.f
+			)
+		);
     }  
 }
-
-
-
 
 void Game::updateBullets()
 {
@@ -96,24 +113,37 @@ void Game::updateBullets()
     for (auto *bullet : this->bullets)
     {
         bullet->update();  
+
        //bullet culling (top of screen)
          if(bullet->getBounds().top + bullet->getBounds().height < 0.f)
          {  
             //delete bullet
             delete bullet;
             this->bullets.erase(this->bullets.begin() + counter);
-            --counter;  
-
-            //std::cout << this->bullets.size() <<"\n";      
+            --counter;    
         }
-        ++counter
-       
-    }
 
+        ++counter
+    }
+}
+
+void Game::updateEnemies()
+{
+	this->spawnTimer += 0.5f;
+	if (this->spawnTimer >= this->spawnTimerMax)
+	{
+		this->enemies.push_back(new Enemy(rand() % 200, rand() % 200));
+		this->spawnTimer = 0.f;
+	}
+
+	for (auto *enemy : this->enemies)
+	{
+		enemy->update();
+	}
 }
 
 void Game::update()
-    {
+{
     this->updatePollEvents();
 
     this->updateInput();
@@ -121,19 +151,26 @@ void Game::update()
     this->player->update();
 
     this->updateBullets();
-    }
+
+    this->updateEnemies();
+}
+
 void Game::render()
-    
 {
     this->window->clear();
 
-//Draw all the stuffs
+    //Draw all the stuffs
     this->player->render(*this->window);
 
     for (auto *bullet : this->bullets)
     {
-      bullet->render(this->window);
+        bullet->render(this->window);
     }
+
+    for (auto *enemy : this->enemies)
+	{
+		enemy->render(this->window);
+	}
 
     this->window->display();
 }

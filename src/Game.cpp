@@ -3,7 +3,7 @@
 //Private functions 
 void Game::initWindow()
 {
-    this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Swaglords of Space - Ganme 3" , sf::Style::Close |  sf::Style::Titlebar );
+    this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Las Trais by yo" , sf::Style::Close |  sf::Style::Titlebar );
     this->window->setFramerateLimit(144);
     this->window->setVerticalSyncEnabled(false);
 }
@@ -11,7 +11,7 @@ void Game::initWindow()
 void Game::initTextures()
 {
     this->textures["BULLET"] = new sf::Texture();
-    this->textures["BULLET"]->loadFromFile("assets/images/bullet.png");//Aqui se pone la imagen del el poryectil.
+    this->textures["BULLET"]->loadFromFile("images/bullet.png");//Aqui se pone la imagen del el poryectil.
 }
 
 void Game::initGUI()
@@ -46,7 +46,7 @@ void Game::initGUI()
 
 void Game::initWorld()
 {
-	if (!this->worldBackgroundTex.loadFromFile("Textures/background1.jpg"))//cambio de background
+	if (!this->worldBackgroundTex.loadFromFile("images/background1.jpg"))//cambio de background
 	{
 		std::cout << "ERROR::GAME::COULD NOT LOAD BACKGROUND TEXTURE" << "\n";
 	}

@@ -14,7 +14,7 @@
     void Player::initTexture()
     {
         //load a texture from file
-        if(!this->texture.loadFromFile("assets/images/ship.png"))//Aqui se inserta la imagen de la nave, pero no entendi la explicacion asi que queda pendiente con el profe :P
+        if(!this->texture.loadFromFile("images/ship.png"))//Aqui se inserta la imagen de la nave, pero no entendi la explicacion asi que queda pendiente con el profe :P
         {
             std::cout << "ERROR::PLAYER::INITTEXTURE::Could not load texture file." << "\n"; 
         }

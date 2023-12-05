@@ -11,7 +11,7 @@ void Game::initWindow()
 void Game::initTextures()
 {
     this->textures["BULLET"] = new sf::Texture();
-    this->textures["BULLET"]->loadFromFile("images/bullet.png");//Aqui se pone la imagen del el poryectil.
+    this->textures["BULLET"]->loadFromFile("Textures/bullet.png");//Aqui se pone la imagen del el poryectil.
 }
 
 void Game::initGUI()
@@ -30,7 +30,7 @@ void Game::initGUI()
 	this->gameOverText.setFont(this->font);
 	this->gameOverText.setCharacterSize(60);
 	this->gameOverText.setFillColor(sf::Color::Red);
-	this->gameOverText.setString("Game Over!");
+	this->gameOverText.setString("Mamaste!");
 	this->gameOverText.setPosition(
 		this->window->getSize().x / 2.f - this->gameOverText.getGlobalBounds().width / 2.f, 
 		this->window->getSize().y / 2.f - this->gameOverText.getGlobalBounds().height / 2.f);
@@ -46,7 +46,7 @@ void Game::initGUI()
 
 void Game::initWorld()
 {
-	if (!this->worldBackgroundTex.loadFromFile("images/background1.jpg"))//cambio de background
+	if (!this->worldBackgroundTex.loadFromFile("Textures/background1.jpg"))//cambio de background
 	{
 		std::cout << "ERROR::GAME::COULD NOT LOAD BACKGROUND TEXTURE" << "\n";
 	}
@@ -164,7 +164,7 @@ void Game::updateGUI()
 {
 	std::stringstream ss;
 
-	ss << "Points: " << this->points;
+	ss << "Puntos: " << this->points;
 
 	this->pointText.setString(ss.str());
 

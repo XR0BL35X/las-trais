@@ -1,49 +1,49 @@
 #pragma once
 
-#include<map>
-#include<string>
-#include<sstream>
-#include"Player.h"
-#include"Bullet.h"
-#include"Enemy.h"
+#include <map>
+#include <string>
+#include <sstream>
+#include "Player.h"
+#include "Bullet.h"
+#include "Enemy.h"
 
 class Game
 {
 private:
-    //window
-    sf::RenderWindow* window;
+	// window
+	sf::RenderWindow *window;
 
-    //Resouces
-    std::map<std::string, sf::Texture*> textures;
-    std::vector<Bullet*> bullets;
+	// Resouces
+	std::map<std::string, sf::Texture *> textures;
+	std::vector<Bullet *> bullets;
 
-    //GUI
+	// GUI
 	sf::Font font;
 	sf::Text pointText;
 
 	sf::Text gameOverText;
 
-	//World
+	// World
 	sf::Texture worldBackgroundTex;
 	sf::Sprite worldBackground;
 
-	//Systems
+	// Systems
 	unsigned points;
 
-    //Player
-    Player* player;
+	// Player
+	Player *player;
 
-    //PlayerGUI
+	// PlayerGUI
 	sf::RectangleShape playerHpBar;
 	sf::RectangleShape playerHpBarBack;
-   
-    //Enemies
+
+	// Enemies
 	float spawnTimer;
 	float spawnTimerMax;
-	std::vector<Enemy*> enemies;
+	std::vector<Enemy *> enemies;
 
-    //Private fuctions
-    void initWindow();
+	// Private fuctions
+	void initWindow();
 	void initTextures();
 	void initGUI();
 	void initWorld();
@@ -53,10 +53,10 @@ private:
 	void initEnemies();
 
 public:
-    Game();
+	Game();
 	virtual ~Game();
 
-	//Functions
+	// Functions
 	void run();
 
 	void updatePollEvents();

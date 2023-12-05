@@ -1,15 +1,15 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include<SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 class Enemy
 {
 private:
-    unsigned pointCount;
+	unsigned pointCount;
 	sf::CircleShape shape;
 	int type;
-    float speed;
+	float speed;
 	int hp;
 	int hpMax;
 	int damage;
@@ -22,14 +22,14 @@ public:
 	Enemy(float pos_x, float pos_y);
 	virtual ~Enemy();
 
-    	//Accessors
+	// Accessors
 	const sf::FloatRect getBounds() const;
-	const int& getPoints() const;
-	const int& getDamage() const;
-    
-	//Functions
+	const int &getPoints() const;
+	const int &getDamage() const;
+
+	// Functions
 	void update();
-	void render(sf::RenderTarget* target);
+	void render(sf::RenderTarget *target);
 };
 
-#endif //!ENEMY_H
+#endif //! ENEMY_H

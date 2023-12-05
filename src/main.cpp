@@ -1,5 +1,5 @@
 #include "Game.h"
-#include<time.h>
+#include <time.h>
 
 int main()
 {
@@ -9,6 +9,6 @@ int main()
 
     game.run();
 
-    //End of application
+    // End of application
     return 0;
 }

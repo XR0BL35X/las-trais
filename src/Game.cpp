@@ -228,7 +228,7 @@ void Game::updateEnemies()
 	this->spawnTimer += 0.5f;
 	if (this->spawnTimer >= this->spawnTimerMax)
 	{
-		this->enemies.push_back(new Enemy(rand() % 200, rand() % 200));
+		this->enemies.push_back(new Enemy(rand() % this->window->getSize().x-20.f, -100.f));
 		this->spawnTimer = 0.f;
 	}
 

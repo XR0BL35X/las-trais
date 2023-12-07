@@ -54,7 +54,6 @@ class Player
 }
 class Bullet
 {
-   
     -sf::Sprite shape
     -sf::Vector2f direction
     - float movementSpeed

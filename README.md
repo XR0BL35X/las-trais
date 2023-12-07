@@ -74,5 +74,5 @@ GitGraph
 
 
 BY
-- Hector Emmanuel Chavez Barragan-22310203
 - Emmanuel Robles Santos-22310167
+- Hector Emmanuel Chavez Barragan-22310203

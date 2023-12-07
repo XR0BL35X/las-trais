@@ -1,0 +1,86 @@
+
+class Player
+package SF{
+    class Font
+    class Texture
+    class Sprite
+    class RectangleShape
+    class RenderWindow
+}
+
+class Game{
+	- points : unsigned
+    +run()
+	+updatePollEvents()
+	+updateInput()
+	+updateGUI()
+	+updateWorld()
+	+updateCollision()
+	+updateBullets()
+	+updateEnemies()
+	+updateCombat()
+	+update()
+	+renderGUI()
+	+renderWorld()
+	+render()
+}
+class Enemy
+{
+    - sf::CircleShape shape
+    - Count unsigned 
+	- type
+	- float speed
+	- hp
+	- hpMax
+    - damage
+	- points
+	+initShape()
+	+initVariables()
+}
+class Player 
+{
+    -initVariables()
+    -initTexture()
+    -initSprite()
+    + setPosition:  void 
+    + setPosition(const float x, const float y)
+    + setHp: int ()
+    + loseHp: int()
+    + void move(const float dirX, const float dirY)
+    + bool canAttack()
+    + updateAttack()
+    + update()
+    + render(sf::RenderTarget &target)
+}
+class Bullet
+{
+   
+    -sf::Sprite shape
+    -sf::Vector2f direction
+    - float movementSpeed
+    + Bullet()
+    + Bullet(sf::Texture *texture, float pos_x, float pos_y, float dir_x, float dir_y, float movement_speed)
+    + virtual ~Bullet()
+    + sf::FloatRect getBounds() const
+    + update()
+    + render(sf::RenderTarget *target)
+}
+
+Game *-- RenderWindow
+Game *-- Texture
+Game *-- Font
+Game *-- Sprite
+
+
+
+
+Game *--Player
+Game *--Enemy
+Game *--Bullet
+
+
+
+Player o-- Bullet
+
+Enemy -|> Player
+Enemy o-- Bullet
